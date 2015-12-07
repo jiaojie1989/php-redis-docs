@@ -9,6 +9,7 @@ $redis->hSet($key, $field, $value);
 * RETURN
   * `1` if field is a new field in the hash and value was set.
   * `0` if field already exists in the hash and the value was updated.
+  * `false` when key type does not fit `hash`
 
 # HGET
 ```PHP
@@ -31,3 +32,14 @@ $redis->hIncrBy($key, $field, $increment);
   * `false` when trying to increase another key type or a field already filled with non-numberic string, or some other thing that goes wrong.
 * NOTICE
   * when trying to increase an unexisted key or field, the default value is `0`.
+
+# HLEN
+```PHP
+$redis->hLen($key);
+```
+* `VERSION` >= `2.0.0`
+* O(`1`)
+* RETURN
+  * `Integer reply` number of fields in the hash.
+  * `0` when key does not exist.
+  * `false` when the key is not `hash` type.
